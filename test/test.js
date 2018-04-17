@@ -5,9 +5,19 @@
   run = require('../index.js');
 
   run.run({
-    script: "console.log(123);console.log(123);console.log(123);console.log(123/0);throw new Error('An error occurred');"
+    script: "console.log(123);throw new Error('An error occurred');"
   }, function(e, o) {
     return console.log(o.log);
+  });
+
+  run.runCMD({
+    cmd: "ls",
+    parameter: ['..'],
+    log: function(data) {
+      return console.log(data + '');
+    }
+  }, function(e, o) {
+    return console.log(o);
   });
 
 }).call(this);

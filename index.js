@@ -52,6 +52,34 @@
     return cb(err, o);
   };
 
+  exports.runCMD = function(o, cb) {
+    var child, spawn,
+      _this = this;
+    o = o || {};
+    o.cmd = o.cmd || "";
+    o.parameter = o.parameter || [];
+    o.log = o.log || console.log;
+    o.message = o.message || "";
+    spawn = require('child_process').spawn;
+    child = spawn(o.cmd, o.parameter);
+    child.stdout.on('data', function(chunk) {
+      o.log(chunk + '');
+      return o.message += chunk + '';
+    });
+    child.stderr.on('data', function(chunk) {
+      o.log(chunk + '');
+      return o.message += chunk + '';
+    });
+    child.on('close', function(code) {
+      o.code = code;
+      return cb(null, o);
+    });
+    return child.on('error', function(err) {
+      o.error = err;
+      return cb(err, o);
+    });
+  };
+
 }).call(this);
 
 /*

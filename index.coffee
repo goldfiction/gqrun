@@ -32,3 +32,23 @@ exports.run=(o,cb)->
   o.log=Log
   cb(err,o)
 
+exports.runCMD=(o,cb)->
+  o=o||{}
+  o.cmd=o.cmd||""
+  o.parameter=o.parameter||[]
+  o.log=o.log||console.log
+  o.message=o.message||""
+  spawn = require('child_process').spawn
+  child = spawn o.cmd, o.parameter
+  child.stdout.on 'data', (chunk)->
+    o.log chunk+''
+    o.message+=chunk+''
+  child.stderr.on 'data', (chunk)->
+    o.log chunk+''
+    o.message+=chunk+''
+  child.on 'close', (code) =>
+    o.code=code
+    cb null,o
+  child.on 'error', (err) =>
+    o.error=err
+    cb err,o
