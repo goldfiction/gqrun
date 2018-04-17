@@ -8,7 +8,7 @@ exports.run=(o,cb)->
 
   Log=""
 
-  log=(obj)->
+  log=o.log||(obj)->
     if(obj)
       if typeof obj=="string"
         Log+='\n'+obj
@@ -17,14 +17,14 @@ exports.run=(o,cb)->
       else
         Log+='\n'+obj+''
 
-  o.script=o.script||""
+  o.text=o.text||""
   o.context=o.context||{}
   context={log:log,console:{log:log},process:{stdout:{write:log},stderr:{write:log}}}
   o.context=_.extend(context,o.context)
   err=null
 
   try
-    vm.runInNewContext(o.script, o.context, o.options)
+    vm.runInNewContext(o.text, o.context, o.options)
   catch e
     log JSON.stringify(e.stack,null,2)
     err=e

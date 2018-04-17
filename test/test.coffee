@@ -1,7 +1,7 @@
 run=require '../index.js'
 
 # pass in your script as script property
-run.run {script:"
+run.run {text:"
 console.log(123);
 throw new Error('An error occurred');
 "},(e,o)->

@@ -12,7 +12,7 @@
     o.options = o.options || {};
     o.options.displayErrors = false;
     Log = "";
-    log = function(obj) {
+    log = o.log || function(obj) {
       if (obj) {
         if (typeof obj === "string") {
           return Log += '\n' + obj;
@@ -23,7 +23,7 @@
         }
       }
     };
-    o.script = o.script || "";
+    o.text = o.text || "";
     o.context = o.context || {};
     context = {
       log: log,
@@ -42,7 +42,7 @@
     o.context = _.extend(context, o.context);
     err = null;
     try {
-      vm.runInNewContext(o.script, o.context, o.options);
+      vm.runInNewContext(o.text, o.context, o.options);
     } catch (_error) {
       e = _error;
       log(JSON.stringify(e.stack, null, 2));
