@@ -1,11 +1,14 @@
 {
-  "name":"gqrun",
-  "main":"index.js",
-  "private":false,
-  "license":"MIT",
-  "version":"0.0.3",
-  "repository":"git@github.com:goldfiction/gqrun.git",
-  "dependencies":{
-    "lodash":"1.3.0"
+  "name": "gqrun",
+  "main": "index.js",
+  "private": false,
+  "license": "MIT",
+  "version": "0.0.4",
+  "repository": "git@github.com:goldfiction/gqrun.git",
+  "dependencies": {
+    "lodash": "^4.17.19"
+  },
+  "scripts":{
+    "compile":"coffee --compile test && coffee --compile index.coffee"
   }
 }

@@ -1,0 +1,2 @@
+console.log(123);
+throw new Error('An error occurred');

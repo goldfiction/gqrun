@@ -1,5 +1,6 @@
 vm = require "vm"
 _=require 'lodash'
+endOfLine = require('os').EOL
 
 exports.run=(o,cb)->
   o=o||{}
@@ -11,11 +12,11 @@ exports.run=(o,cb)->
   log=o.log||(obj)->
     if(obj)
       if typeof obj=="string"
-        Log+='\n'+obj
+        Log+=endOfLine+obj
       else if typeof obj=="object"
-        Log+='\n'+JSON.stringify(obj,null,2)
+        Log+=endOfLine+JSON.stringify(obj,null,2)
       else
-        Log+='\n'+obj+''
+        Log+=endOfLine+obj+''
 
   o.text=o.text||""
   o.context=o.context||{}
@@ -26,7 +27,7 @@ exports.run=(o,cb)->
   try
     vm.runInNewContext(o.text, o.context, o.options)
   catch e
-    log JSON.stringify(e.stack,null,2)
+    log e.stack
     err=e
 
   o.log=Log
