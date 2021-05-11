@@ -6,7 +6,7 @@
   "version": "0.0.4",
   "repository": "git@github.com:goldfiction/gqrun.git",
   "dependencies": {
-    "lodash": "^4.17.19"
+    "lodash": "^4.17.21"
   },
   "scripts":{
     "compile":"coffee --compile test && coffee --compile index.coffee"
